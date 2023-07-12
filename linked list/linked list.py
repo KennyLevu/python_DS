@@ -18,6 +18,17 @@ class LinkedList:
         while (_temp):
             print(_temp.data)
             _temp = _temp.next
+
+    # Text representation of linked list
+    def __repr__(self):
+        node = self.head
+        nodes = []
+        while node is not None:
+            nodes.append(str(node.data))
+            node = node.next
+        nodes.append("None")
+        return " -> ".join(nodes)
+        
 if __name__=='__main__':
     # initialize ll object
     llist = LinkedList()
@@ -32,3 +43,4 @@ if __name__=='__main__':
     second.next = third
 
     llist.printList()
+    print(llist)
