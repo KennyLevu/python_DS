@@ -9,8 +9,14 @@ class Node:
 # Linked list class
 class LinkedList:
     # Function to inialize linked list object
-    def __init__(self):
+    def __init__(self, nodes=None):
         self.head = None
+        if nodes is not None:
+            node = Node(data=nodes.pop(0))
+            self.head = node
+            for elem in nodes:
+                node.next = Node(data=elem)
+                node = node.next
 
     # Function to traverse linked list
     def printList(self):
@@ -43,4 +49,9 @@ if __name__=='__main__':
     second.next = third
 
     llist.printList()
+    print(llist)
+
+    #initalize with list
+    print('initailizing with list [a,b,c,d,420]')
+    llist = LinkedList(['a','b','c','d',420])
     print(llist)
