@@ -34,6 +34,13 @@ class LinkedList:
             node = node.next
         nodes.append("None")
         return " -> ".join(nodes)
+
+    # iterator
+    def __iter__(self):
+        node = self.head
+        while node is not None:
+            yield node
+            node = node.next
         
 if __name__=='__main__':
     # initialize ll object
