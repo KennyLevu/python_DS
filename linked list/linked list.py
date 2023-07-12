@@ -6,6 +6,10 @@ class Node:
         self.data = data # data assisnged to node object
         self.next = None # pointer to next node
 
+    # printable representation of node
+    def __repr__(self):
+        return str(self.data)
+
 # Linked list class
 class LinkedList:
     # Function to inialize linked list object
@@ -62,3 +66,8 @@ if __name__=='__main__':
     print('initailizing with list [a,b,c,d,420]')
     llist = LinkedList(['a','b','c','d',420])
     print(llist)
+
+    # using iterator on the list
+    print('using iterator to print list')
+    for node in llist:
+        print(node)
