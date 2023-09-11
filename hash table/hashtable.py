@@ -1,8 +1,13 @@
 # hashtable.py
 
+# special constant for creating abrand new object to represent
+# blank spaces within HashTable
+
+BLANK = object()
+
 class HashTable:
     def __init__(self, capacity):
-        self.values = capacity * [None]
+        self.values = capacity * [BLANK]
 
     def __len__(self):
         return len(self.values)
