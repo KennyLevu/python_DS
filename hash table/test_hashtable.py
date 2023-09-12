@@ -25,7 +25,7 @@ def test_should_create_empty_value_slots():
     hash_table = HashTable(capacity=3)
 
     # When
-    actual_values = hash_table.values
+    actual_values = hash_table.pairs
 
     # Then
     assert actual_values == expected_values
@@ -38,23 +38,23 @@ def test_should_insert_key_value_pairs():
     hash_table[98.6] = 37
     hash_table[False] = True
     
-    assert "hello" in hash_table.values
-    assert 37 in hash_table.values
-    assert True in hash_table.values
+    assert "hello" in hash_table.pairs
+    assert 37 in hash_table.pairs
+    assert True in hash_table.pairs
 
     assert len(hash_table) == 100
 
 def test_should_not_contain_none_value_when_created():
-    assert None not in HashTable(capacity=100).values
+    assert None not in HashTable(capacity=100).pairs
 
 def test_should_create_empty_value_slots():
-    assert HashTable(capacity=3).values == [BLANK, BLANK, BLANK]
+    assert HashTable(capacity=3).pairs == [BLANK, BLANK, BLANK]
 
 def test_should_insert_none_value():
     hash_table = HashTable(capacity=100)
     hash_table["key"] = None
     print(hash_table)
-    assert None in hash_table.values
+    assert None in hash_table.pairs
 
 def test_should_find_value_by_key(hash_table):
     print(hash_table)
@@ -88,13 +88,13 @@ def test_should_get_value_with_dfault(hash_table):
 
 def test_should_delete_key_value_pair(hash_table):
     assert 'hola' in hash_table
-    assert 'hello' in hash_table.values
+    assert 'hello' in hash_table.pairs
     assert len(hash_table) == 100
 
     del hash_table['hola']
 
     assert 'hola' not in hash_table
-    assert 'hello' not in hash_table.values
+    assert 'hello' not in hash_table.pairs
     assert len(hash_table) == 100
 
 def test_should_raise_key_error_when_deleting(hash_table):
