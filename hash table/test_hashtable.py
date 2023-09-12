@@ -2,6 +2,14 @@
 from hashtable import HashTable, BLANK
 import pytest
 
+@pytest.fixture
+def hash_table():
+    sample_data = HashTable(capacity=100)
+    sample_data["hola"] = 'hello'
+    sample_data[98.6] = 37
+    sample_data[False] = True
+    return sample_data
+
 def test_should_always_pass():
     assert 2 + 2 == 4, "This is just a dummy test"
 
@@ -47,3 +55,9 @@ def test_should_insert_none_value():
     hash_table["key"] = None
     print(hash_table)
     assert None in hash_table.values
+
+def test_should_find_value_by_key(hash_table):
+    print(hash_table)
+    assert hash_table['hola'] == 'hello'
+    assert hash_table[98.6] == 37
+    assert hash_table[False] == True
