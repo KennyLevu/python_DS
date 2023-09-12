@@ -35,4 +35,8 @@ class HashTable:
             return self[key]
         except KeyError:
             return default
+  
+    def __delitem__(self, key):
+        index = hash(key) % len(self)
+        del self.values[index]
     
