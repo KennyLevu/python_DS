@@ -3,11 +3,18 @@
 # special constant for creating abrand new object to represent
 # blank spaces within HashTable
 
-BLANK = object()
+# BLANK = object()
+
+from typing import Any, NamedTuple
+
+
+class Pair(NamedTuple):
+    key: Any
+    value: Any
 
 class HashTable:
     def __init__(self, capacity):
-        self.pairs = capacity * [BLANK]
+        self.pairs = capacity * [None]
 
     def _index(self, key):
         return hash(key) % len(self)
@@ -16,13 +23,13 @@ class HashTable:
         return len(self.pairs)
     
     def __setitem__(self, key, value):
-        self.pairs[self._index(key)] = value
+        self.pairs[self._index(key)] = Pair(key, value)
 
     def __getitem__(self, key):
-        value = self.pairs[self._index(key)]
-        if value is BLANK:
+        pair = self.pairs[self._index(key)]
+        if pair is None:
             raise KeyError(key)
-        return value
+        return pair.value
     
     def __contains__(self,key):
         try:
@@ -39,6 +46,6 @@ class HashTable:
   
     def __delitem__(self, key):
         if key in self:
-            self[key] = BLANK
+            self.pairs[self._index(key)] = None
         else: 
             raise KeyError(key)

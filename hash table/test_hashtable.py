@@ -1,5 +1,5 @@
 # test_hashtable.py
-from hashtable import HashTable, BLANK
+from hashtable import HashTable
 import pytest
 
 @pytest.fixture
@@ -38,17 +38,19 @@ def test_should_insert_key_value_pairs():
     hash_table[98.6] = 37
     hash_table[False] = True
     
-    assert "hello" in hash_table.pairs
-    assert 37 in hash_table.pairs
-    assert True in hash_table.pairs
+    assert ("hola", "hello") in hash_table.pairs
+    assert (98.6, 37) in hash_table.pairs
+    assert (False, True) in hash_table.pairs
 
     assert len(hash_table) == 100
 
 def test_should_not_contain_none_value_when_created():
-    assert None not in HashTable(capacity=100).pairs
+    hash_table = HashTable(capacity=100)
+    values = [pair.value for pair in hash_table.pairs if pair]
+    assert None not in values
 
 def test_should_create_empty_value_slots():
-    assert HashTable(capacity=3).pairs == [BLANK, BLANK, BLANK]
+    assert HashTable(capacity=3).pairs == [None, None, None]
 
 def test_should_insert_none_value():
     hash_table = HashTable(capacity=100)
@@ -88,13 +90,13 @@ def test_should_get_value_with_dfault(hash_table):
 
 def test_should_delete_key_value_pair(hash_table):
     assert 'hola' in hash_table
-    assert 'hello' in hash_table.pairs
+    assert ('hola', 'hello') in hash_table.pairs
     assert len(hash_table) == 100
 
     del hash_table['hola']
 
     assert 'hola' not in hash_table
-    assert 'hello' not in hash_table.pairs
+    assert ('hola', 'hello') not in hash_table.pairs
     assert len(hash_table) == 100
 
 def test_should_raise_key_error_when_deleting(hash_table):
