@@ -38,4 +38,7 @@ class HashTable:
             return default
   
     def __delitem__(self, key):
-        self.values[self._index(key)] = BLANK    
+        if key in self:
+            self[key] = BLANK
+        else: 
+            raise KeyError(key)
